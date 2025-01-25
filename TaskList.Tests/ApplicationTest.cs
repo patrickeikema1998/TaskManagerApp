@@ -17,7 +17,7 @@ namespace Tasks
 			var taskList = new TaskList.TaskList(console);
 			this.applicationThread = new System.Threading.Thread(() => taskList.Run());
 			applicationThread.Start();
-			ReadLines(TaskList.TaskList.startupText);
+			ReadLines(TaskList.TaskListCommandLine.startupText);
 		}
 
 		[TearDown]

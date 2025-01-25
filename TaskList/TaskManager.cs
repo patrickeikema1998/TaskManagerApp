@@ -1,13 +1,10 @@
-﻿using System;
-using System.Threading.Tasks;
-using TaskList.Core;
-using static System.Runtime.InteropServices.JavaScript.JSType;
+﻿using TaskList.Core;
 
 namespace TaskList
 {
     public class TaskManager : ITaskManager
     {
-        private readonly IDictionary<string, IList<Task>> tasks;
+        public IDictionary<string, IList<Task>> tasks;
         private long lastId = 0;
 
 
@@ -15,6 +12,8 @@ namespace TaskList
         {
             tasks = new Dictionary<string, IList<Task>>();
         }
+
+        public IDictionary<string, IList<Task>> GetAllTasks() => tasks;
 
         public TaskManagerResult AddProject(string name)
         {
@@ -37,12 +36,12 @@ namespace TaskList
 
         private long NextId() => ++lastId;
 
-        public TaskManagerResult CheckTask(int taskId) => SetDone(taskId, true);
+        public TaskManagerResult CheckTask(long taskId) => SetDone(taskId, true);
 
 
-        public TaskManagerResult UncheckTask(int taskId) => SetDone(taskId, false);
+        public TaskManagerResult UncheckTask(long taskId) => SetDone(taskId, false);
 
-        public Task? GetTask(int taskId)
+        public Task? GetTask(long taskId)
         {
             Task? task = tasks
                 .SelectMany(project => project.Value)
@@ -53,23 +52,31 @@ namespace TaskList
 
         public IDictionary<DateTime, List<Task>> GetTasksByDeadline()
         {
-            IDictionary<DateTime, List<Task>> tasksByDeadline = new Dictionary<DateTime, List<Task>>();
-
-            tasksByDeadline = tasks
+            return tasks
                 .SelectMany(project => project.Value)
                 .GroupBy(task => task.Deadline.Date)
                 .OrderBy(group => group.Key == DateTime.MinValue ? DateTime.MaxValue : group.Key) //if it the min-value (default datetime value), treat it as latest possible date. else treat is as normal.
                 .ToDictionary(group => group.Key, group => group.ToList());
-
-            return tasksByDeadline;
         }
 
         public List<Task> GetTasksOfToday()
         {
-            throw new NotImplementedException();
+            DateTime today = DateTime.Today;
+
+            return tasks
+                .SelectMany(project => project.Value)
+                .Where(task => task.Deadline.Date == today)
+                .ToList();
         }
 
-        public TaskManagerResult SetDone(int taskId, bool done)
+        public string GetProjectNameOfTask(long taskId)
+        {
+            return tasks
+                   .FirstOrDefault(project => project.Value.Any(task => task.Id == taskId))
+                   .Key;
+        }
+
+        public TaskManagerResult SetDone(long taskId, bool done)
         {
             var identifiedTask = tasks
                 .Select(project => project.Value.FirstOrDefault(task => task.Id == taskId))
@@ -85,7 +92,7 @@ namespace TaskList
             return TaskManagerResult.SuccessResult();
         }
 
-        public TaskManagerResult AddDeadlineToTask(int taskId, DateTime deadline)
+        public TaskManagerResult AddDeadlineToTask(long taskId, DateTime deadline)
         {
             Task? task = GetTask(taskId);
 
