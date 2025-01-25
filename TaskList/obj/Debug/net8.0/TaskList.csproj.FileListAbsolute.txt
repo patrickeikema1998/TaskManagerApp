@@ -32,3 +32,37 @@ C:\Users\patri\Downloads\chapter-hiring-assessment-backend-main\chapter-hiring-a
 C:\Users\patri\Downloads\chapter-hiring-assessment-backend-main\chapter-hiring-assessment-backend-main\csharp\TaskList\TaskList\obj\Debug\net8.0\TaskList.pdb
 C:\Users\patri\Downloads\chapter-hiring-assessment-backend-main\chapter-hiring-assessment-backend-main\csharp\TaskList\TaskList\obj\Debug\net8.0\TaskList.genruntimeconfig.cache
 C:\Users\patri\Downloads\chapter-hiring-assessment-backend-main\chapter-hiring-assessment-backend-main\csharp\TaskList\TaskList\obj\Debug\net8.0\ref\TaskList.dll
+C:\Work & Productivity\Web Development\Ortec Finance\TaskManagerApp\TaskList\bin\Debug\net8.0\appsettings.Development.json
+C:\Work & Productivity\Web Development\Ortec Finance\TaskManagerApp\TaskList\bin\Debug\net8.0\appsettings.json
+C:\Work & Productivity\Web Development\Ortec Finance\TaskManagerApp\TaskList\bin\Debug\net8.0\TaskList.exe
+C:\Work & Productivity\Web Development\Ortec Finance\TaskManagerApp\TaskList\bin\Debug\net8.0\TaskList.deps.json
+C:\Work & Productivity\Web Development\Ortec Finance\TaskManagerApp\TaskList\bin\Debug\net8.0\TaskList.runtimeconfig.json
+C:\Work & Productivity\Web Development\Ortec Finance\TaskManagerApp\TaskList\bin\Debug\net8.0\TaskList.dll
+C:\Work & Productivity\Web Development\Ortec Finance\TaskManagerApp\TaskList\bin\Debug\net8.0\TaskList.pdb
+C:\Work & Productivity\Web Development\Ortec Finance\TaskManagerApp\TaskList\bin\Debug\net8.0\Microsoft.AspNetCore.OpenApi.dll
+C:\Work & Productivity\Web Development\Ortec Finance\TaskManagerApp\TaskList\bin\Debug\net8.0\Microsoft.OpenApi.dll
+C:\Work & Productivity\Web Development\Ortec Finance\TaskManagerApp\TaskList\bin\Debug\net8.0\Swashbuckle.AspNetCore.Swagger.dll
+C:\Work & Productivity\Web Development\Ortec Finance\TaskManagerApp\TaskList\bin\Debug\net8.0\Swashbuckle.AspNetCore.SwaggerGen.dll
+C:\Work & Productivity\Web Development\Ortec Finance\TaskManagerApp\TaskList\bin\Debug\net8.0\Swashbuckle.AspNetCore.SwaggerUI.dll
+C:\Work & Productivity\Web Development\Ortec Finance\TaskManagerApp\TaskList\obj\Debug\net8.0\TaskList.csproj.AssemblyReference.cache
+C:\Work & Productivity\Web Development\Ortec Finance\TaskManagerApp\TaskList\obj\Debug\net8.0\TaskList.GeneratedMSBuildEditorConfig.editorconfig
+C:\Work & Productivity\Web Development\Ortec Finance\TaskManagerApp\TaskList\obj\Debug\net8.0\TaskList.AssemblyInfoInputs.cache
+C:\Work & Productivity\Web Development\Ortec Finance\TaskManagerApp\TaskList\obj\Debug\net8.0\TaskList.AssemblyInfo.cs
+C:\Work & Productivity\Web Development\Ortec Finance\TaskManagerApp\TaskList\obj\Debug\net8.0\TaskList.csproj.CoreCompileInputs.cache
+C:\Work & Productivity\Web Development\Ortec Finance\TaskManagerApp\TaskList\obj\Debug\net8.0\TaskList.MvcApplicationPartsAssemblyInfo.cs
+C:\Work & Productivity\Web Development\Ortec Finance\TaskManagerApp\TaskList\obj\Debug\net8.0\TaskList.MvcApplicationPartsAssemblyInfo.cache
+C:\Work & Productivity\Web Development\Ortec Finance\TaskManagerApp\TaskList\obj\Debug\net8.0\TaskList.sourcelink.json
+C:\Work & Productivity\Web Development\Ortec Finance\TaskManagerApp\TaskList\obj\Debug\net8.0\staticwebassets.build.json
+C:\Work & Productivity\Web Development\Ortec Finance\TaskManagerApp\TaskList\obj\Debug\net8.0\staticwebassets.development.json
+C:\Work & Productivity\Web Development\Ortec Finance\TaskManagerApp\TaskList\obj\Debug\net8.0\staticwebassets\msbuild.TaskList.Microsoft.AspNetCore.StaticWebAssets.props
+C:\Work & Productivity\Web Development\Ortec Finance\TaskManagerApp\TaskList\obj\Debug\net8.0\staticwebassets\msbuild.build.TaskList.props
+C:\Work & Productivity\Web Development\Ortec Finance\TaskManagerApp\TaskList\obj\Debug\net8.0\staticwebassets\msbuild.buildMultiTargeting.TaskList.props
+C:\Work & Productivity\Web Development\Ortec Finance\TaskManagerApp\TaskList\obj\Debug\net8.0\staticwebassets\msbuild.buildTransitive.TaskList.props
+C:\Work & Productivity\Web Development\Ortec Finance\TaskManagerApp\TaskList\obj\Debug\net8.0\staticwebassets.pack.json
+C:\Work & Productivity\Web Development\Ortec Finance\TaskManagerApp\TaskList\obj\Debug\net8.0\scopedcss\bundle\TaskList.styles.css
+C:\Work & Productivity\Web Development\Ortec Finance\TaskManagerApp\TaskList\obj\Debug\net8.0\TaskList.csproj.Up2Date
+C:\Work & Productivity\Web Development\Ortec Finance\TaskManagerApp\TaskList\obj\Debug\net8.0\TaskList.dll
+C:\Work & Productivity\Web Development\Ortec Finance\TaskManagerApp\TaskList\obj\Debug\net8.0\refint\TaskList.dll
+C:\Work & Productivity\Web Development\Ortec Finance\TaskManagerApp\TaskList\obj\Debug\net8.0\TaskList.pdb
+C:\Work & Productivity\Web Development\Ortec Finance\TaskManagerApp\TaskList\obj\Debug\net8.0\TaskList.genruntimeconfig.cache
+C:\Work & Productivity\Web Development\Ortec Finance\TaskManagerApp\TaskList\obj\Debug\net8.0\ref\TaskList.dll

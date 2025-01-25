@@ -465,11 +465,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\patri\\Downloads\\chapter-hiring-assessment-backend-main\\chapter-hiring-assessment-backend-main\\csharp\\TaskList\\TaskList\\TaskList.csproj",
+      "projectUniqueName": "C:\\Work & Productivity\\Web Development\\Ortec Finance\\TaskManagerApp\\TaskList\\TaskList.csproj",
       "projectName": "TaskList",
-      "projectPath": "C:\\Users\\patri\\Downloads\\chapter-hiring-assessment-backend-main\\chapter-hiring-assessment-backend-main\\csharp\\TaskList\\TaskList\\TaskList.csproj",
+      "projectPath": "C:\\Work & Productivity\\Web Development\\Ortec Finance\\TaskManagerApp\\TaskList\\TaskList.csproj",
       "packagesPath": "C:\\Users\\patri\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\patri\\Downloads\\chapter-hiring-assessment-backend-main\\chapter-hiring-assessment-backend-main\\csharp\\TaskList\\TaskList\\obj\\",
+      "outputPath": "C:\\Work & Productivity\\Web Development\\Ortec Finance\\TaskManagerApp\\TaskList\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\patri\\AppData\\Roaming\\NuGet\\NuGet.Config",

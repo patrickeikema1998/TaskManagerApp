@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "doLX4OWe5E8=",
+  "dgSpecHash": "SGAOdIwaTBE=",
   "success": true,
-  "projectFilePath": "C:\\Users\\patri\\Downloads\\chapter-hiring-assessment-backend-main\\chapter-hiring-assessment-backend-main\\csharp\\TaskList\\TaskList.Tests\\TaskList.Tests.csproj",
+  "projectFilePath": "C:\\Work & Productivity\\Web Development\\Ortec Finance\\TaskManagerApp\\TaskList.Tests\\TaskList.Tests.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\patri\\.nuget\\packages\\coverlet.collector\\6.0.0\\coverlet.collector.6.0.0.nupkg.sha512",
     "C:\\Users\\patri\\.nuget\\packages\\microsoft.aspnetcore.openapi\\8.0.5\\microsoft.aspnetcore.openapi.8.0.5.nupkg.sha512",
