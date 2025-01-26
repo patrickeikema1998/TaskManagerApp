@@ -38,7 +38,7 @@ namespace TaskList
 		private void Execute(string commandLine)
 		{
 			var commandRest = commandLine.Split(" ".ToCharArray(), 2);
-			var command = commandRest[0];
+			var command = commandRest[0];	
 			switch (command) {
 			case "show":
 				Show();
@@ -128,8 +128,8 @@ namespace TaskList
 
 			if (result.Success)
 			{
-				console.WriteLine("Added dealine: \"{0}\" to task with id \"{1}\"", datetime, taskId);                
-            }
+				console.WriteLine("Added deadline: \"{0}\" to task with id \"{1}\"", datetime.ToString("dd-MM-yyyy"), taskId);
+			}
 			else
 			{
 				console.WriteLine(result.Message);
@@ -138,11 +138,12 @@ namespace TaskList
 		
 		private void Today()
 		{
-            foreach (Task task in taskManager.GetTasksOfToday())
-            {
-                Console.WriteLine("Project: \"{0}\", Task: \"{1}\"", taskManager.GetProjectNameOfTask(task.Id), task.Description);
-            }
-        }
+			foreach (Task task in taskManager.GetTasksOfToday())
+			{
+				Console.WriteLine("Project: \"{0}\", Task: \"{1}\"", taskManager.GetProjectNameOfTask(task.Id), task.Description);
+
+			}
+		}
 
         private void ViewByDeadline()
         {

@@ -3,14 +3,12 @@ using TaskList.Core;
 
 if (args.Length > 0)
 {
-    TaskList.TaskListCommandLine.Main(args);
+    TaskListCommandLine.Main(args);
 }
 else
 {
     var builder = WebApplication.CreateBuilder(args);
 
-    /*//injecting a new taskmanager
-    builder.Services.AddSingleton<ITaskManager, TaskManager>();*/
 
     // Add services to the container.
     builder.Services.AddEndpointsApiExplorer();

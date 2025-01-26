@@ -34,6 +34,12 @@ namespace TaskList
             return TaskManagerResult.SuccessResult();
         }
 
+        public void ClearTasks()
+        {
+            tasks.Clear();
+            lastId = 0;
+        }
+
         private long NextId() => ++lastId;
 
         public TaskManagerResult CheckTask(long taskId) => SetDone(taskId, true);

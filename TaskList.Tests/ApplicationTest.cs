@@ -1,4 +1,6 @@
+using System.Diagnostics;
 using TaskList;
+using TaskList.Core;
 
 namespace Tasks
 {
@@ -10,11 +12,16 @@ namespace Tasks
 		private FakeConsole console;
 		private System.Threading.Thread applicationThread;
 
-		[SetUp]
+		private readonly TaskManager taskManager = new TaskManager();
+        private CancellationTokenSource cancellationTokenSource;
+
+
+        [SetUp]
 		public void StartTheApplication()
 		{
 			this.console = new FakeConsole();
-			var taskList = new TaskList.TaskList(console);
+            this.cancellationTokenSource = new CancellationTokenSource();
+            var taskList = new TaskList.TaskListCommandLine(taskManager, console);
 			this.applicationThread = new System.Threading.Thread(() => taskList.Run());
 			applicationThread.Start();
 			ReadLines(TaskList.TaskListCommandLine.startupText);
@@ -28,58 +35,105 @@ namespace Tasks
 				return;
 			}
 
-			applicationThread.Abort();
-			throw new Exception("The application is still running.");
+            Execute("quit");
+
+            // Signal the thread to stop by canceling the token
+            cancellationTokenSource.Cancel();
+
+            // Wait for the thread to finish
+            applicationThread.Join();
+
+            // Optionally, check if the thread has terminated successfully
+            if (applicationThread.IsAlive)
+            {
+                throw new Exception("The application is still running.");
+            }
+
+            cancellationTokenSource.Dispose();
+        }
+
+        [Test, Timeout(1000)]
+		public void TestAddProjectCommand()
+		{
+            taskManager.ClearTasks();
+            Execute("add project secrets");
+            Execute("show");
+            ReadLines(
+                "secrets",
+				""
+            );
+        }
+
+        [Test, Timeout(1000)]
+        public void TestAddTaskCommand()
+        {
+            taskManager.ClearTasks();
+            Execute("add project secrets");
+			Execute("add task secrets Laundry");
+            Execute("show");
+            ReadLines(
+                 "secrets",
+                "    [ ] 1: Laundry",
+                ""
+            );
+        }
+
+        [Test, Timeout(1000)]
+		public void TestCheckCommand()
+		{
+            taskManager.ClearTasks();
+            Execute("add project secrets");
+            Execute("add task secrets Laundry");
+            Execute("check 1");
+            Execute("show");
+            ReadLines(
+                 "secrets",
+                "    [x] 1: Laundry",
+                ""
+            );
+        }
+
+
+		[Test, Timeout(1000)]
+		public void TestDeadLineCommand()
+		{
+			taskManager.ClearTasks();
+			Execute("add project secrets");
+			Execute("add task secrets Laundry");
+			Execute("deadline 1 25-01-2025");
+			ReadLines("Added deadline: \"25-01-2025\" to task with id \"1\"");
 		}
 
 		[Test, Timeout(1000)]
-		public void ItWorks()
+		public void TestTodayCommand()
 		{
-			Execute("show");
+			string today = DateTime.Now.ToString("dd-MM-yyyy");
+
+			taskManager.ClearTasks();
+			Execute("add project secrets");
+			Execute("add task secrets Laundry");
+			Execute($"deadline 1 {today}");
+			Execute("today");
+			ReadLines("Project: \"secrets\", Task: \"Laundry\"");
+		}
+
+		[Test, Timeout(1000)]
+		public void TestViewByDeadlineCommand()
+		{
+			taskManager.ClearTasks();
 
 			Execute("add project secrets");
-			Execute("add task secrets Eat more donuts.");
-			Execute("add task secrets Destroy all humans.");
-
-			Execute("show");
+			Execute("add task secrets Laundry");
+			Execute("add task secrets Game");
+			Execute("deadline 1 26-01-2025");
+			Execute("view-by-deadline");
 			ReadLines(
-				"secrets",
-				"    [ ] 1: Eat more donuts.",
-				"    [ ] 2: Destroy all humans.",
-				""
-			);
-
-			Execute("add project training");
-			Execute("add task training Four Elements of Simple Design");
-			Execute("add task training SOLID");
-			Execute("add task training Coupling and Cohesion");
-			Execute("add task training Primitive Obsession");
-			Execute("add task training Outside-In TDD");
-			Execute("add task training Interaction-Driven Design");
-
-			Execute("check 1");
-			Execute("check 3");
-			Execute("check 5");
-			Execute("check 6");
-
-			Execute("show");
-			ReadLines(
-				"secrets",
-				"    [x] 1: Eat more donuts.",
-				"    [ ] 2: Destroy all humans.",
-				"",
-				"training",
-				"    [x] 3: Four Elements of Simple Design",
-				"    [ ] 4: SOLID",
-				"    [x] 5: Coupling and Cohesion",
-				"    [x] 6: Primitive Obsession",
-				"    [ ] 7: Outside-In TDD",
-				"    [ ] 8: Interaction-Driven Design",
-				""
-			);
-
-			Execute("quit");
+				"26-01-2025:",
+                "        1: Laundry",
+				"No deadline:",
+                "        2: Game");
 		}
+
 
 		private void Execute(string command)
 		{

@@ -5,6 +5,7 @@
         IDictionary<string, IList<Task>> GetAllTasks();
         TaskManagerResult AddTask(string project, string description);
         TaskManagerResult AddProject(string name);
+        void ClearTasks();
         Task? GetTask(long taskId);
         TaskManagerResult CheckTask(long taskId);
         TaskManagerResult UncheckTask(long taskId);
