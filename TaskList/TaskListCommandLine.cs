@@ -124,7 +124,7 @@ namespace TaskList
 
 			DateTime datetime = DateTime.ParseExact(date, "dd-MM-yyyy", null);
 
-			TaskManagerResult result = taskManager.AddDeadlineToTask(taskId, datetime);
+			TaskManagerResult result = taskManager.SetDeadlineOfTask(taskId, datetime);
 
 			if (result.Success)
 			{

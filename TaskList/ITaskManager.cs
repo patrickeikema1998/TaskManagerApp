@@ -10,7 +10,8 @@
         TaskManagerResult CheckTask(long taskId);
         TaskManagerResult UncheckTask(long taskId);
         TaskManagerResult SetDone(long idString, bool done);
-        TaskManagerResult AddDeadlineToTask(long taskId, DateTime deadline);
+        TaskManagerResult SetDeadlineOfTask(long taskId, DateTime deadline);
+        TaskManagerResult SetDeadlineOfTask(string projectId ,long taskId, DateTime deadline);
         List<Task> GetTasksOfToday();
         IDictionary<DateTime, List<Task>> GetTasksByDeadline();
         string GetProjectNameOfTask(long taskId);

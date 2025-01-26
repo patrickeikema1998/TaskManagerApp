@@ -9,6 +9,7 @@ else
 {
     var builder = WebApplication.CreateBuilder(args);
 
+    builder.Services.AddSingleton<TaskManager>();
 
     // Add services to the container.
     builder.Services.AddEndpointsApiExplorer();

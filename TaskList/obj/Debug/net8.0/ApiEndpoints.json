@@ -1,5 +1,78 @@
 [
   {
+    "ContainingType": "TaskList.ProjectsController",
+    "Method": "CreateProject",
+    "RelativePath": "projects",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "projectName",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "TaskList.ProjectsController",
+    "Method": "CreateTask",
+    "RelativePath": "projects/{projectId}/tasks",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "taskRequest",
+        "Type": "TaskList.ProjectsController\u002BCreateTaskRequest",
+        "IsRequired": true
+      },
+      {
+        "Name": "projectId",
+        "Type": "",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "TaskList.ProjectsController",
+    "Method": "UpdateTaskDeadline",
+    "RelativePath": "projects/{projectId}/tasks/{taskId}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "projectId",
+        "Type": "System.String",
+        "IsRequired": true
+      },
+      {
+        "Name": "taskId",
+        "Type": "System.Int64",
+        "IsRequired": true
+      },
+      {
+        "Name": "deadline",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "TaskList.ProjectsController",
+    "Method": "GetTasksGroupedByDeadline",
+    "RelativePath": "projects/view_by_deadline",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "TaskList.TasksController",
     "Method": "GetTasks",
     "RelativePath": "tasks",

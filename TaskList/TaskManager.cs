@@ -98,7 +98,7 @@ namespace TaskList
             return TaskManagerResult.SuccessResult();
         }
 
-        public TaskManagerResult AddDeadlineToTask(long taskId, DateTime deadline)
+        public TaskManagerResult SetDeadlineOfTask(long taskId, DateTime deadline)
         {
             Task? task = GetTask(taskId);
 
@@ -111,6 +111,27 @@ namespace TaskList
             {
                 return TaskManagerResult.FailureResult("Task with given id is not found.");
             }
+        }
+
+        public TaskManagerResult SetDeadlineOfTask(string projectId, long taskId, DateTime deadline)
+        {
+            if (!tasks.TryGetValue(projectId, out IList<Task> projectTasks))
+            {
+                return TaskManagerResult.FailureResult("Project is not found.");
+            }
+
+            Task? task = GetTask(taskId);
+
+            if (task != null)
+            {
+                task.Deadline = deadline;
+            }
+            else
+            {
+                return TaskManagerResult.FailureResult("Task is not found.");
+            }
+
+            return TaskManagerResult.SuccessResult();
         }
     }
 }
