@@ -1,16 +1,28 @@
-using System;
-using System.Collections.Generic;
-
 namespace TaskList
 {
-	public class Task
-	{
-		public long Id { get; set; }
+    /// <summary>
+    /// Represents a task in the task list.
+    /// </summary>
+    public class Task
+    {
+        /// <summary>
+        /// The unique identifier for the task.
+        /// </summary>
+        public long Id { get; set; }
 
-		public string Description { get; set; }
+        /// <summary>
+        /// The description of the task.
+        /// </summary>
+        public string Description { get; set; }
 
-		public bool Done { get; set; }
+        /// <summary>
+        /// A value indicating whether the task is completed.
+        /// </summary>
+        public bool Done { get; set; }
 
-		public DateTime Deadline { get; set; }
-	}
+        /// <summary>
+        /// Tthe deadline for the task.
+        /// </summary>
+        public DateTime Deadline { get; set; }
+    }
 }

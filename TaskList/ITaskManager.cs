@@ -14,6 +14,7 @@
         TaskManagerResult SetDeadlineOfTask(string projectId ,long taskId, DateTime deadline);
         List<Task> GetTasksOfToday();
         IDictionary<DateTime, List<Task>> GetTasksByDeadline();
+        IDictionary<string, List<Task>> GroupTasksByProject(List<Task> tasks);
         string GetProjectNameOfTask(long taskId);
     }
 }

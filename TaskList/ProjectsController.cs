@@ -1,22 +1,31 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using System.Text;
-using TaskList.Core;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace TaskList
 {
+    /// <summary>
+    /// API Controller for managing projects and tasks.
+    /// </summary>
     [Route("projects")]
     [ApiController]
     public class ProjectsController : ControllerBase
     {
         private readonly TaskManager taskManager;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ProjectsController"/> class.
+        /// </summary>
+        /// <param name="taskManager">The task manager instance.</param>
         public ProjectsController(TaskManager taskManager)
         {
             this.taskManager = taskManager;
         }
 
+        /// <summary>
+        /// Creates a new project.
+        /// </summary>
+        /// <param name="projectName">The name of the project to create.</param>
+        /// <returns>A response indicating the result of the operation.</returns>
         [HttpPost]
         public IActionResult CreateProject([FromBody] string projectName)
         {
@@ -24,19 +33,26 @@ namespace TaskList
 
             if (!result.Success)
             {
-                return BadRequest(result.Message);
+                return BadRequest(result.Message); // Return a 400 Bad Request with the error message.
             }
 
-            return CreatedAtAction(nameof(CreateProject), new { projectName });
+            return CreatedAtAction(nameof(CreateProject), new { projectName }); // Return a 201 Created response.
         }
 
-        // A model for the CreateTask action
+        /// <summary>
+        /// Request model for creating a task.
+        /// </summary>
         public class CreateTaskRequest
         {
-            public string ProjectId { get; set; }
-            public string TaskName { get; set; }
+            public string ProjectId { get; set; } // The ID of the project.
+            public string TaskName { get; set; } // The name of the task.
         }
 
+        /// <summary>
+        /// Creates a new task within a specified project.
+        /// </summary>
+        /// <param name="taskRequest">The task creation request.</param>
+        /// <returns>A response indicating the result of the operation.</returns>
         [HttpPost("{projectId}/tasks")]
         public IActionResult CreateTask(CreateTaskRequest taskRequest)
         {
@@ -44,27 +60,34 @@ namespace TaskList
 
             if (!result.Success)
             {
-                return BadRequest(result.Message);
-
+                return BadRequest(result.Message); // Return a 400 Bad Request with the error message.
             }
-            return Ok();
+            return Ok(); // Return a 200 OK response.
         }
 
+        /// <summary>
+        /// Updates the deadline of a task.
+        /// </summary>
+        /// <param name="projectId">The ID of the project.</param>
+        /// <param name="taskId">The ID of the task.</param>
+        /// <param name="deadline">The new deadline in "dd-MM-yyyy" format.</param>
+        /// <returns>A response indicating the result of the operation.</returns>
         [HttpPut("{projectId}/tasks/{taskId}")]
-        public IActionResult UpdateTaskDeadline(
-            string projectId,
-        long taskId,
-            string deadline)
+        public IActionResult UpdateTaskDeadline(string projectId, long taskId, string deadline)
         {
             TaskManagerResult result = taskManager.SetDeadlineOfTask(projectId, taskId, DateTime.ParseExact(deadline, "dd-MM-yyyy", null));
 
             if (!result.Success)
             {
-                return BadRequest(result.Message);
+                return BadRequest(result.Message); // Return a 400 Bad Request with the error message.
             }
-            return Ok($"Deadline for task {taskId} updated to {deadline}.");
+            return Ok($"Deadline for task {taskId} updated to {deadline}."); // Return a 200 OK with a success message.
         }
 
+        /// <summary>
+        /// Retrieves tasks grouped by their deadline.
+        /// </summary>
+        /// <returns>A formatted string of tasks grouped by deadline.</returns>
         [HttpGet("view_by_deadline")]
         public IActionResult GetTasksGroupedByDeadline()
         {
@@ -78,21 +101,20 @@ namespace TaskList
 
                 if (deadline == DateTime.MinValue)
                 {
-                    result.AppendLine("No deadline:");
+                    result.AppendLine("No deadline:"); // Append "No deadline" for tasks without a deadline.
                 }
                 else
                 {
-                    result.AppendLine($"{deadline.ToString("dd-MM-yyyy")}:");
+                    result.AppendLine($"{deadline.ToString("dd-MM-yyyy")}:"); // Append the formatted deadline date.
                 }
 
                 foreach (var task in group.Value)
                 {
-                    result.AppendLine($"{task.Id}: {task.Description}");
+                    result.AppendLine($"{task.Id}: {task.Description}"); // Append task details.
                 }
             }
 
-            return Ok(result.ToString()); // Return the formatted string
+            return Ok(result.ToString()); // Return the formatted string.
         }
     }
 }
-

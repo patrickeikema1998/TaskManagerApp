@@ -4,36 +4,44 @@ using TaskList.Core;
 
 namespace Tasks
 {
-	[TestFixture]
-	public sealed class ApplicationTest
-	{
-		public const string PROMPT = "> ";
+    /// <summary>
+    /// A test class for the application that runs commands and verifies outputs.
+    /// </summary>
+    [TestFixture]
+    public sealed class ApplicationTest
+    {
+        public const string PROMPT = "> ";
 
-		private FakeConsole console;
-		private System.Threading.Thread applicationThread;
+        private FakeConsole console;
+        private System.Threading.Thread applicationThread;
 
-		private readonly TaskManager taskManager = new TaskManager();
+        private readonly TaskManager taskManager = new TaskManager();
         private CancellationTokenSource cancellationTokenSource;
 
-
+        /// <summary>
+        /// Sets up the application for testing by starting the application thread and initializing necessary components.
+        /// </summary>
         [SetUp]
-		public void StartTheApplication()
-		{
-			this.console = new FakeConsole();
-            this.cancellationTokenSource = new CancellationTokenSource();
+        public void StartTheApplication()
+        {
+            console = new FakeConsole();
+            cancellationTokenSource = new CancellationTokenSource();
             var taskList = new TaskList.TaskListCommandLine(taskManager, console);
-			this.applicationThread = new System.Threading.Thread(() => taskList.Run());
-			applicationThread.Start();
-			ReadLines(TaskList.TaskListCommandLine.startupText);
-		}
+            applicationThread = new System.Threading.Thread(() => taskList.Run());
+            applicationThread.Start();
+            ReadLines(TaskList.TaskListCommandLine.startupText);
+        }
 
-		[TearDown]
-		public void KillTheApplication()
-		{
-			if (applicationThread == null || !applicationThread.IsAlive)
-			{
-				return;
-			}
+        /// <summary>
+        /// Cleans up the application after each test by terminating the application thread and disposing resources.
+        /// </summary>
+        [TearDown]
+        public void KillTheApplication()
+        {
+            if (applicationThread == null || !applicationThread.IsAlive)
+            {
+                return;
+            }
 
             Execute("quit");
 
@@ -52,24 +60,30 @@ namespace Tasks
             cancellationTokenSource.Dispose();
         }
 
+        /// <summary>
+        /// Tests the 'add project' command by adding a project and verifying it shows up.
+        /// </summary>
         [Test, Timeout(1000)]
-		public void TestAddProjectCommand()
-		{
+        public void TestAddProjectCommand()
+        {
             taskManager.ClearTasks();
             Execute("add project secrets");
             Execute("show");
             ReadLines(
                 "secrets",
-				""
+                ""
             );
         }
 
+        /// <summary>
+        /// Tests the 'add task' command by adding a task to a project and verifying it shows up.
+        /// </summary>
         [Test, Timeout(1000)]
         public void TestAddTaskCommand()
         {
             taskManager.ClearTasks();
             Execute("add project secrets");
-			Execute("add task secrets Laundry");
+            Execute("add task secrets Laundry");
             Execute("show");
             ReadLines(
                  "secrets",
@@ -78,9 +92,12 @@ namespace Tasks
             );
         }
 
+        /// <summary>
+        /// Tests the 'check' command by marking a task as completed and verifying the task status.
+        /// </summary>
         [Test, Timeout(1000)]
-		public void TestCheckCommand()
-		{
+        public void TestCheckCommand()
+        {
             taskManager.ClearTasks();
             Execute("add project secrets");
             Execute("add task secrets Laundry");
@@ -93,72 +110,91 @@ namespace Tasks
             );
         }
 
+        /// <summary>
+        /// Tests the 'deadline' command by assigning a deadline to a task and verifying the output.
+        /// </summary>
+        [Test, Timeout(1000)]
+        public void TestDeadLineCommand()
+        {
+            taskManager.ClearTasks();
+            Execute("add project secrets");
+            Execute("add task secrets Laundry");
+            Execute("deadline 1 25-01-2025");
+            ReadLines("Added deadline: \"25-01-2025\" to task with id \"1\"");
+        }
 
-		[Test, Timeout(1000)]
-		public void TestDeadLineCommand()
-		{
-			taskManager.ClearTasks();
-			Execute("add project secrets");
-			Execute("add task secrets Laundry");
-			Execute("deadline 1 25-01-2025");
-			ReadLines("Added deadline: \"25-01-2025\" to task with id \"1\"");
-		}
+        /// <summary>
+        /// Tests the 'today' command by assigning a deadline and verifying if the task is shown correctly.
+        /// </summary>
+        [Test, Timeout(1000)]
+        public void TestTodayCommand()
+        {
+            string today = DateTime.Now.ToString("dd-MM-yyyy");
 
-		[Test, Timeout(1000)]
-		public void TestTodayCommand()
-		{
-			string today = DateTime.Now.ToString("dd-MM-yyyy");
+            taskManager.ClearTasks();
+            Execute("add project secrets");
+            Execute("add task secrets Laundry");
+            Execute($"deadline 1 {today}");
+            Execute("today");
+            ReadLines("Project: \"secrets\", Task: \"Laundry\"");
+        }
 
-			taskManager.ClearTasks();
-			Execute("add project secrets");
-			Execute("add task secrets Laundry");
-			Execute($"deadline 1 {today}");
-			Execute("today");
-			ReadLines("Project: \"secrets\", Task: \"Laundry\"");
-		}
+        /// <summary>
+        /// Tests the 'view-by-deadline' command by adding multiple tasks with deadlines and verifying the output.
+        /// </summary>
+        [Test, Timeout(1000)]
+        public void TestViewByDeadlineCommand()
+        {
+            taskManager.ClearTasks();
 
-		[Test, Timeout(1000)]
-		public void TestViewByDeadlineCommand()
-		{
-			taskManager.ClearTasks();
-
-			Execute("add project secrets");
-			Execute("add task secrets Laundry");
-			Execute("add task secrets Game");
-			Execute("deadline 1 26-01-2025");
-			Execute("view-by-deadline");
-			ReadLines(
-				"26-01-2025:",
+            Execute("add project secrets");
+            Execute("add task secrets Laundry");
+            Execute("add task secrets Game");
+            Execute("deadline 1 26-01-2025");
+            Execute("view-by-deadline");
+            ReadLines(
+                "26-01-2025:",
                 "        1: Laundry",
-				"No deadline:",
+                "No deadline:",
                 "        2: Game");
-		}
+        }
 
+        /// <summary>
+        /// Executes a command and simulates user input/output.
+        /// </summary>
+        private void Execute(string command)
+        {
+            Read(PROMPT);
+            Write(command);
+        }
 
-		private void Execute(string command)
-		{
-			Read(PROMPT);
-			Write(command);
-		}
+        /// <summary>
+        /// Reads and asserts the expected output from the console.
+        /// </summary>
+        private void Read(string expectedOutput)
+        {
+            var length = expectedOutput.Length;
+            var actualOutput = console.RetrieveOutput(expectedOutput.Length);
+            Assert.AreEqual(expectedOutput, actualOutput);
+        }
 
-		private void Read(string expectedOutput)
-		{
-			var length = expectedOutput.Length;
-			var actualOutput = console.RetrieveOutput(expectedOutput.Length);
-			Assert.AreEqual(expectedOutput, actualOutput);
-		}
+        /// <summary>
+        /// Reads multiple lines of expected output.
+        /// </summary>
+        private void ReadLines(params string[] expectedOutput)
+        {
+            foreach (var line in expectedOutput)
+            {
+                Read(line + Environment.NewLine);
+            }
+        }
 
-		private void ReadLines(params string[] expectedOutput)
-		{
-			foreach (var line in expectedOutput)
-			{
-				Read(line + Environment.NewLine);
-			}
-		}
-
-		private void Write(string input)
-		{
-			console.SendInput(input + Environment.NewLine);
-		}
-	}
+        /// <summary>
+        /// Simulates user input to the console.
+        /// </summary>
+        private void Write(string input)
+        {
+            console.SendInput(input + Environment.NewLine);
+        }
+    }
 }
