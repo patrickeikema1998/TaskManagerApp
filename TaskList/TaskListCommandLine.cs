@@ -1,6 +1,9 @@
-﻿using System.Text.RegularExpressions;
+﻿using Microsoft.AspNetCore.Mvc.ViewFeatures;
+using System.Numerics;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using TaskList.Core;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace TaskList
 {
@@ -68,10 +71,10 @@ namespace TaskList
                     Add(commandRest[1]);
                     break;
                 case "check": // Mark a task as done.
-                    taskManager.CheckTask(int.Parse(commandRest[1]));
+                    SetDone(commandRest[1], true);
                     break;
                 case "uncheck": // Mark a task as not done.
-                    taskManager.UncheckTask(int.Parse(commandRest[1]));
+                    SetDone(commandRest[1], false);
                     break;
                 case "help": // Show available commands.
                     Help();
@@ -122,9 +125,38 @@ namespace TaskList
             else if (subcommand == "task") // Add a new task to a project.
             {
                 var projectTask = subcommandRest[1].Split(" ".ToCharArray(), 2);
-                taskManager.AddTask(projectTask[0], projectTask[1]);
+                if (projectTask.Length < 2)
+                {
+                    console.WriteLine("Please provide both project and task description");
+                } else
+                {
+                    TaskManagerResult result = taskManager.AddTask(projectTask[0], projectTask[1]);
+
+                    if (!result.Success)
+                    {
+                        console.WriteLine(result.Message);
+                    }
+                }
             }
         }
+
+        /// <summary>
+        /// Sets the done status of a task.
+        /// </summary>
+        private void SetDone(string taskId, bool done)
+        {
+            TaskManagerResult result = taskManager.SetDone(int.Parse(taskId), done);
+
+            if (!result.Success)
+            {
+                console.WriteLine(result.Message);
+            } else
+            {
+                string isItDone = done ? "done" : "undone";
+                //console.WriteLine($"Successfully set the task to {isItDone}");
+            }
+        }
+
 
         /// <summary>
         /// Displays help text for all available commands.
@@ -151,7 +183,19 @@ namespace TaskList
             int taskId = int.Parse(subcommandRest[0]);
             string date = subcommandRest[1];
 
-            DateTime datetime = DateTime.ParseExact(date, "dd-MM-yyyy", null);
+            DateTime datetime = new DateTime();
+
+            //Tries to parse the date as a DateTime. If this doesn't work, we return an error message.
+            try
+            {
+                datetime = DateTime.ParseExact(date, "dd-MM-yyyy", null);
+            }
+            catch (FormatException)
+            {
+                Console.WriteLine("The date is not in the correct format \"dd-MM-yyyy\".");
+                return;
+            }
+
             TaskManagerResult result = taskManager.SetDeadlineOfTask(taskId, datetime);
 
             if (result.Success)

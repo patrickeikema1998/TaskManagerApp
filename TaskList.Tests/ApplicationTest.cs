@@ -63,7 +63,7 @@ namespace Tasks
         /// <summary>
         /// Tests the 'add project' command by adding a project and verifying it shows up.
         /// </summary>
-        [Test, Timeout(1000)]
+        [Test, Timeout(1000), NonParallelizable]
         public void TestAddProjectCommand()
         {
             taskManager.ClearTasks();
@@ -78,7 +78,7 @@ namespace Tasks
         /// <summary>
         /// Tests the 'add task' command by adding a task to a project and verifying it shows up.
         /// </summary>
-        [Test, Timeout(1000)]
+        [Test, Timeout(1000), NonParallelizable]
         public void TestAddTaskCommand()
         {
             taskManager.ClearTasks();
@@ -95,10 +95,11 @@ namespace Tasks
         /// <summary>
         /// Tests the 'check' command by marking a task as completed and verifying the task status.
         /// </summary>
-        [Test, Timeout(1000)]
+        [Test, Timeout(1000), NonParallelizable]
         public void TestCheckCommand()
         {
             taskManager.ClearTasks();
+
             Execute("add project secrets");
             Execute("add task secrets Laundry");
             Execute("check 1");
@@ -113,7 +114,7 @@ namespace Tasks
         /// <summary>
         /// Tests the 'deadline' command by assigning a deadline to a task and verifying the output.
         /// </summary>
-        [Test, Timeout(1000)]
+        [Test, Timeout(1000), NonParallelizable]
         public void TestDeadLineCommand()
         {
             taskManager.ClearTasks();
@@ -126,7 +127,7 @@ namespace Tasks
         /// <summary>
         /// Tests the 'today' command by assigning a deadline and verifying if the task is shown correctly.
         /// </summary>
-        [Test, Timeout(1000)]
+        [Test, Timeout(1000), NonParallelizable]
         public void TestTodayCommand()
         {
             string today = DateTime.Now.ToString("dd-MM-yyyy");
@@ -135,22 +136,24 @@ namespace Tasks
             Execute("add project secrets");
             Execute("add task secrets Laundry");
             Execute($"deadline 1 {today}");
+            ReadLines($"Added deadline: \"{today}\" to task with id \"1\"");
             Execute("today");
             ReadLines("Project: \"secrets\", Task: \"Laundry\"");
+
         }
 
         /// <summary>
         /// Tests the 'view-by-deadline' command by adding multiple tasks with deadlines and verifying the output.
         /// </summary>
-        [Test, Timeout(1000)]
+        [Test, Timeout(1000), NonParallelizable]
         public void TestViewByDeadlineCommand()
         {
             taskManager.ClearTasks();
-
             Execute("add project secrets");
             Execute("add task secrets Laundry");
             Execute("add task secrets Game");
             Execute("deadline 1 26-01-2025");
+            Read($"Added deadline: \"26-01-2025\" to task with id \"1\"" + Environment.NewLine);
             Execute("view-by-deadline");
             ReadLines(
                 "26-01-2025:",
@@ -175,6 +178,8 @@ namespace Tasks
         {
             var length = expectedOutput.Length;
             var actualOutput = console.RetrieveOutput(expectedOutput.Length);
+            Console.WriteLine(expectedOutput);
+
             Assert.AreEqual(expectedOutput, actualOutput);
         }
 
