@@ -85,17 +85,17 @@ namespace TaskList
         }
 
         /// <summary>
-        /// Retrieves tasks grouped by their deadline.
+        /// Retrieves tasks grouped by their deadline per project.
         /// </summary>
-        /// <returns>A formatted string of tasks grouped by deadline.</returns>
+        /// <returns>A formatted string of tasks grouped by deadline per project.</returns>
         [HttpGet("view_by_deadline")]
         public IActionResult GetTasksGroupedByDeadline()
         {
-            var tasksByDeadline = taskManager.GetTasksByDeadline();
+            var tasksByDeadlinePerProject = taskManager.GetTasksByDeadlinePerProject();
 
             var result = new StringBuilder();
 
-            foreach (var group in tasksByDeadline)
+            foreach (var group in tasksByDeadlinePerProject)
             {
                 DateTime deadline = group.Key;
 
@@ -108,13 +108,18 @@ namespace TaskList
                     result.AppendLine($"{deadline.ToString("dd-MM-yyyy")}:"); // Append the formatted deadline date.
                 }
 
-                foreach (var task in group.Value)
+                foreach (var projectGroup in group.Value)
                 {
-                    result.AppendLine($"{task.Id}: {task.Description}"); // Append task details.
+                    result.AppendLine($"{projectGroup.Key}:"); // Print project name.
+
+                    foreach (var task in projectGroup.Value)
+                    {
+                        result.AppendLine($"{task.Id}: {task.Description}");
+                    }
                 }
             }
 
-            return Ok(result.ToString()); // Return the formatted string.
+            return Ok(result.ToString()); // Returns the formatted string.
         }
     }
 }

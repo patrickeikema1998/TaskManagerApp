@@ -224,14 +224,12 @@ namespace TaskList
         /// </summary>
         private void ViewByDeadline()
         {
-            foreach (var group in taskManager.GetTasksByDeadline())
-            {
+            var tasksByDeadLinePerProject = taskManager.GetTasksByDeadlinePerProject();
+
+            foreach(var group in tasksByDeadLinePerProject){
+
                 DateTime deadline = group.Key;
 
-                var taskPerProject = taskManager.GroupTasksByProject(group.Value);
-
-                /*writes the deadline to the console.
-                  If the date is not set, we print no deadline.*/
                 if (deadline == DateTime.MinValue)
                 {
                     Console.WriteLine("No deadline:");
@@ -241,8 +239,7 @@ namespace TaskList
                     Console.WriteLine($"{deadline.ToString("dd-MM-yyyy")}:");
                 }
 
-                // Prints the group and its task that comes with this group.
-                foreach (var projectGroup in taskPerProject)
+                foreach(var projectGroup in group.Value)
                 {
                     Console.WriteLine($"\t{projectGroup.Key}:"); // Print project name.
 

@@ -118,6 +118,19 @@ namespace TaskList
                 .ToDictionary(group => group.Key, group => group.ToList());
         }
 
+        public IDictionary<DateTime, IDictionary<string, List<Task>>> GetTasksByDeadlinePerProject()
+        {
+            return tasks
+                .SelectMany(project => project.Value) // Flatten tasks from all projects
+                .GroupBy(task => task.Deadline.Date) // Group tasks by deadline
+                .OrderBy(group => group.Key == DateTime.MinValue ? DateTime.MaxValue : group.Key) // Handle default date
+                .ToDictionary(
+                    deadlineGroup => deadlineGroup.Key, // Key: deadline
+                    deadlineGroup => GroupTasksByProject(deadlineGroup.ToList()) // Group tasks per project.
+                );
+        }
+
+
         /// <summary>
         /// Retrieves tasks that have today's date as their deadline.
         /// </summary>

@@ -66,3 +66,41 @@ C:\Work & Productivity\Web Development\Ortec Finance\TaskManagerApp\TaskList\obj
 C:\Work & Productivity\Web Development\Ortec Finance\TaskManagerApp\TaskList\obj\Debug\net8.0\TaskList.pdb
 C:\Work & Productivity\Web Development\Ortec Finance\TaskManagerApp\TaskList\obj\Debug\net8.0\TaskList.genruntimeconfig.cache
 C:\Work & Productivity\Web Development\Ortec Finance\TaskManagerApp\TaskList\obj\Debug\net8.0\ref\TaskList.dll
+C:\Web Development\TaskManagerApp\TaskList\bin\Debug\net8.0\appsettings.Development.json
+C:\Web Development\TaskManagerApp\TaskList\bin\Debug\net8.0\appsettings.json
+C:\Web Development\TaskManagerApp\TaskList\bin\Debug\net8.0\TaskList.staticwebassets.endpoints.json
+C:\Web Development\TaskManagerApp\TaskList\bin\Debug\net8.0\TaskList.exe
+C:\Web Development\TaskManagerApp\TaskList\bin\Debug\net8.0\TaskList.deps.json
+C:\Web Development\TaskManagerApp\TaskList\bin\Debug\net8.0\TaskList.runtimeconfig.json
+C:\Web Development\TaskManagerApp\TaskList\bin\Debug\net8.0\TaskList.dll
+C:\Web Development\TaskManagerApp\TaskList\bin\Debug\net8.0\TaskList.pdb
+C:\Web Development\TaskManagerApp\TaskList\bin\Debug\net8.0\Microsoft.AspNetCore.OpenApi.dll
+C:\Web Development\TaskManagerApp\TaskList\bin\Debug\net8.0\Microsoft.OpenApi.dll
+C:\Web Development\TaskManagerApp\TaskList\bin\Debug\net8.0\Swashbuckle.AspNetCore.Swagger.dll
+C:\Web Development\TaskManagerApp\TaskList\bin\Debug\net8.0\Swashbuckle.AspNetCore.SwaggerGen.dll
+C:\Web Development\TaskManagerApp\TaskList\bin\Debug\net8.0\Swashbuckle.AspNetCore.SwaggerUI.dll
+C:\Web Development\TaskManagerApp\TaskList\obj\Debug\net8.0\TaskList.csproj.AssemblyReference.cache
+C:\Web Development\TaskManagerApp\TaskList\obj\Debug\net8.0\TaskList.GeneratedMSBuildEditorConfig.editorconfig
+C:\Web Development\TaskManagerApp\TaskList\obj\Debug\net8.0\TaskList.AssemblyInfoInputs.cache
+C:\Web Development\TaskManagerApp\TaskList\obj\Debug\net8.0\TaskList.AssemblyInfo.cs
+C:\Web Development\TaskManagerApp\TaskList\obj\Debug\net8.0\TaskList.csproj.CoreCompileInputs.cache
+C:\Web Development\TaskManagerApp\TaskList\obj\Debug\net8.0\TaskList.MvcApplicationPartsAssemblyInfo.cs
+C:\Web Development\TaskManagerApp\TaskList\obj\Debug\net8.0\TaskList.MvcApplicationPartsAssemblyInfo.cache
+C:\Web Development\TaskManagerApp\TaskList\obj\Debug\net8.0\TaskList.sourcelink.json
+C:\Web Development\TaskManagerApp\TaskList\obj\Debug\net8.0\scopedcss\bundle\TaskList.styles.css
+C:\Web Development\TaskManagerApp\TaskList\obj\Debug\net8.0\staticwebassets.build.json
+C:\Web Development\TaskManagerApp\TaskList\obj\Debug\net8.0\staticwebassets.development.json
+C:\Web Development\TaskManagerApp\TaskList\obj\Debug\net8.0\staticwebassets.build.endpoints.json
+C:\Web Development\TaskManagerApp\TaskList\obj\Debug\net8.0\staticwebassets\msbuild.TaskList.Microsoft.AspNetCore.StaticWebAssets.props
+C:\Web Development\TaskManagerApp\TaskList\obj\Debug\net8.0\staticwebassets\msbuild.TaskList.Microsoft.AspNetCore.StaticWebAssetEndpoints.props
+C:\Web Development\TaskManagerApp\TaskList\obj\Debug\net8.0\staticwebassets\msbuild.build.TaskList.props
+C:\Web Development\TaskManagerApp\TaskList\obj\Debug\net8.0\staticwebassets\msbuild.buildMultiTargeting.TaskList.props
+C:\Web Development\TaskManagerApp\TaskList\obj\Debug\net8.0\staticwebassets\msbuild.buildTransitive.TaskList.props
+C:\Web Development\TaskManagerApp\TaskList\obj\Debug\net8.0\staticwebassets.pack.json
+C:\Web Development\TaskManagerApp\TaskList\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt
+C:\Web Development\TaskManagerApp\TaskList\obj\Debug\net8.0\TaskList.csproj.Up2Date
+C:\Web Development\TaskManagerApp\TaskList\obj\Debug\net8.0\TaskList.dll
+C:\Web Development\TaskManagerApp\TaskList\obj\Debug\net8.0\refint\TaskList.dll
+C:\Web Development\TaskManagerApp\TaskList\obj\Debug\net8.0\TaskList.pdb
+C:\Web Development\TaskManagerApp\TaskList\obj\Debug\net8.0\TaskList.genruntimeconfig.cache
+C:\Web Development\TaskManagerApp\TaskList\obj\Debug\net8.0\ref\TaskList.dll
